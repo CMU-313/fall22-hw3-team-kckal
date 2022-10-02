@@ -77,7 +77,25 @@
           <select-tag tags="document.tags" ref="inputTags" ng-disabled="fileIsUploading"></select-tag>
         </div>
       </div>
+      
 
+      <fieldset>
+      <legend>{{ 'document.edit.education' | translate }}</legend>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="inputuniversityname">{{ 'document.universityname' | translate }}</label>
+        <div class="col-sm-10">
+          <input type="text" id="inputuniversityname" name="inputuniversityname"><br>
+          <!--<select-tag tags="document.tags" ref="inputTags" ng-disabled="fileIsUploading"></select-tag>-->
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="inputmajor">{{ 'document.major' | translate }}</label>
+        <div class="col-sm-10">
+          <input type="text" id="inputmajor" name="inputmajor"><br>
+          <!--<select-tag tags="document.tags" ref="inputTags" ng-disabled="fileIsUploading"></select-tag>-->
+        </div>
+      </div>
       <div class="form-group">
         <label class="col-sm-2 control-label" for="inputGPA">{{ 'document.gpa' | translate }}</label>
         <div class="col-sm-10">
@@ -85,7 +103,25 @@
           <!--<select-tag tags="document.gpa" ref="inputGPA" ng-disabled="fileIsUploading"></select-tag>-->
         </div>
       </div>
-      
+
+      <div class="form-group" ng-class="{ 'has-error': !documentForm.graduationDate.$valid }">
+        <label class="col-sm-2 control-label" for="inputGraduationDate">{{ 'document.graduation_date' | translate }}</label>
+        <div class="col-sm-10">
+          <div class="input-group">
+            <input type="text" id="inputGraduationDate" name="graduationDate"
+                   current-text="{{ 'directive.datepicker.current' | translate }}"
+                   clear-text="{{ 'directive.datepicker.clear' | translate }}"
+                   close-text="{{ 'directive.datepicker.close' | translate }}"
+                   uib-datepicker-popup="{{ dateFormat }}" class="form-control"
+                   ng-model="document.graduation_date" datepicker-options="{ startingDay: 1, showWeeks: false }"
+                   is-open="graddatepickerOpened" ng-disabled="fileIsUploading" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="graddatepickerOpened = true" ng-disabled="fileIsUploading"><i class="fas fa-calendar"></i></button>
+            </span>
+          </div>
+        </div>
+      </div>
+      </fieldset>
       
 
       <!-- Custom metadata -->
