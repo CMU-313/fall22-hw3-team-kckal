@@ -376,6 +376,15 @@ public class DocumentResource extends BaseResource {
      * @apiSuccess {Number} documents.create_date Create date (timestamp)
      * @apiSuccess {Number} documents.update_date Update date (timestamp)
      * @apiSuccess {String} documents.language Language
+     * @apiSuccess {String} documents.university_name Applicant University Name
+     * @apiSuccess {String} documents.major Applicant major
+     * @apiSuccess {String} documents.graduation_date Applicant graduation date
+     * @apiSuccess {Number} documents.gpa Applicant Grade point average
+     * @apiSuccess {String} documents.company_name Company name
+     * @apiSuccess {String} documents.title_name Title name
+     * @apiSuccess {String} documents.job_description Description of job
+     * @apiSuccess {String} documents.start_date Start date of job (timestamp)
+     * @apiSuccess {String} documents.end_date End date of job (timestamp)
      * @apiSuccess {Boolean} documents.shared True if the document is shared
      * @apiSuccess {Boolean} documents.active_route True if a route is active on this document
      * @apiSuccess {Boolean} documents.current_step_name Name of the current route step
@@ -461,6 +470,16 @@ public class DocumentResource extends BaseResource {
                     .add("description", JsonUtil.nullable(documentDto.getDescription()))
                     .add("create_date", documentDto.getCreateTimestamp())
                     .add("update_date", documentDto.getUpdateTimestamp())
+                    .add("university_name", documentDto.getUniversityName())
+                    .add("major", documentDto.getMajorName())
+                    .add("graduation_date", documentDto.getGraduationDate())
+                    .add("gpa", documentDto.getGPA())
+                    .add("company_name", documentDto.getCompanyName())
+                    .add("title_name", documentDto.getTitleName())
+                    .add("job_description", documentDto.getJobDescription())
+                    .add("start_date", documentDto.getStartDate())
+                    .add("end_date", documentDto.getEndDate())
+
                     .add("language", documentDto.getLanguage())
                     .add("shared", documentDto.getShared())
                     .add("active_route", documentDto.isActiveRoute())
@@ -761,6 +780,15 @@ public class DocumentResource extends BaseResource {
         document.setUserId(principal.getId());
         document.setTitle(title);
         document.setDescription(description);
+        document.setUniversityName();
+        document.setMajorName();
+        document.setGraduationDate();
+        document.setGPA();
+        document.setCompanyName();
+        document.setTitleName();
+        document.setJobDescription();
+        document.setStartDate();
+        document.setEndDate();
         document.setSubject(subject);
         document.setIdentifier(identifier);
         document.setPublisher(publisher);
