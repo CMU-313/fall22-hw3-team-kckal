@@ -70,6 +70,7 @@
     "contributors": "Contributors",
     "language": "Language",
     "creation_date": "Creation date",
+    "gpa": "GPA",
     "subject": "Subject",
     "identifier": "Identifier",
     "publisher": "Publisher",
@@ -215,6 +216,9 @@
       "create_date": "Creation date",
       "version": "Version"
     }
+  },
+  "GPA":{
+
   },
   "tag": {
     "new_tag": "New tag",
