@@ -66,10 +66,14 @@
     "shared": "Shared",
     "current_step_name": "Current step",
     "title": "Title",
+    "universityname": "University Name",
     "description": "Description",
     "contributors": "Contributors",
     "language": "Language",
     "creation_date": "Creation date",
+    "graduation_date": "Graduation date",
+    "major": "Major",
+    "gpa": "GPA",
     "subject": "Subject",
     "identifier": "Identifier",
     "publisher": "Publisher",
@@ -155,6 +159,7 @@
       "document_added_with_errors": "Document successfully added but some files cannot be uploaded",
       "quota_reached": "Quota reached",
       "primary_metadata": "Primary metadata",
+      "education": "Education",
       "title_placeholder": "A name given to the resource",
       "description_placeholder": "An account of the resource",
       "new_files": "New files",
@@ -215,6 +220,9 @@
       "create_date": "Creation date",
       "version": "Version"
     }
+  },
+  "GPA":{
+
   },
   "tag": {
     "new_tag": "New tag",
