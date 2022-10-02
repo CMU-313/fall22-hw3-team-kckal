@@ -165,6 +165,68 @@
       </div>
     </fieldset>
 
+    <fieldset>
+      <legend>{{ 'document.edit.work_experience' | translate }}</legend>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="inputCompanyName">{{ 'document.company_name' | translate }}</label>
+        <div class="col-sm-10">
+          <input required ng-maxlength="100" class="form-control" type="text" id="inputCompanyName"
+            name="company_name" ng-model="document.company_name" autocomplete="off"
+            typeahead-wait-ms="200" ng-disabled="fileIsUploading" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="inputTitleName">{{ 'document.title_name' | translate }}</label>
+        <div class="col-sm-10">
+          <input required ng-maxlength="100" class="form-control" type="text" id="inputTitleName"
+            name="title_name" ng-model="document.title_name" autocomplete="off"
+            typeahead-wait-ms="200" ng-disabled="fileIsUploading" />
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error': !documentForm.startDate.$valid }">
+        <label class="col-sm-2 control-label" for="inputStartDate">{{ 'document.start_date' | translate }}</label>
+        <div class="col-sm-10">
+          <div class="input-group">
+            <input type="text" id="inputStartDate" name="startDate"
+                   current-text="{{ 'directive.datepicker.current' | translate }}"
+                   clear-text="{{ 'directive.datepicker.clear' | translate }}"
+                   close-text="{{ 'directive.datepicker.close' | translate }}"
+                   uib-datepicker-popup="{{ dateFormat }}" class="form-control"
+                   ng-model="document.start_date" datepicker-options="{ startingDay: 1, showWeeks: false }"
+                   is-open="startdatepickerOpened" ng-disabled="fileIsUploading" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="startdatepickerOpened = true" ng-disabled="fileIsUploading"><i class="fas fa-calendar"></i></button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error': !documentForm.endDate.$valid }">
+        <label class="col-sm-2 control-label" for="inputEndDate">{{ 'document.end_date' | translate }}</label>
+        <div class="col-sm-10">
+          <div class="input-group">
+            <input type="text" id="inputEndDate" name="endDate"
+                   current-text="{{ 'directive.datepicker.current' | translate }}"
+                   clear-text="{{ 'directive.datepicker.clear' | translate }}"
+                   close-text="{{ 'directive.datepicker.close' | translate }}"
+                   uib-datepicker-popup="{{ dateFormat }}" class="form-control"
+                   ng-model="document.end_date" datepicker-options="{ startingDay: 1, showWeeks: false }"
+                   is-open="enddatepickerOpened" ng-disabled="fileIsUploading" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="enddatepickerOpened = true" ng-disabled="fileIsUploading"><i class="fas fa-calendar"></i></button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="inputJobDescription">{{ 'document.job_description' | translate }}</label>
+        <div class="col-sm-10">
+          <pell-editor name="job_description" id="inputJobDescription"
+                       ng-maxlength="1000" ng-model="document.job_description" ng-disabled="fileIsUploading"></pell-editor>
+          <p class="help-block" ng-show="documentForm.job_description.$error.maxlength && documentForm.$dirty">{{ 'validation.too_long' | translate }}</p>
+        </div>
+      </div>
+    </fieldset>
+
     <fieldset ng-init="additionalMetadataCollapsed = true">
       <legend class="pointer" ng-click="additionalMetadataCollapsed = !additionalMetadataCollapsed">
         {{ 'document.edit.additional_metadata' | translate }}

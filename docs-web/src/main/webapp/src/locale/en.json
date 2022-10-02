@@ -74,6 +74,11 @@
     "graduation_date": "Graduation date",
     "major": "Major",
     "gpa": "GPA",
+    "company_name": "Company Name",
+    "title_name": "Job Title",
+    "job_description": "Job Description",
+    "start_date": "Start Date",
+    "end_date": "End Date",
     "subject": "Subject",
     "identifier": "Identifier",
     "publisher": "Publisher",
@@ -170,7 +175,8 @@
       "publisher_placeholder": "An entity responsible for making the resource available",
       "format_placeholder": "The file format, physical medium, or dimensions of the resource",
       "source_placeholder": "A related resource from which the described resource is derived",
-      "uploading_files": "Uploading files..."
+      "uploading_files": "Uploading files...",
+      "work_experience": "Work Experience"
     },
     "default": {
       "upload_pending": "Pending...",
