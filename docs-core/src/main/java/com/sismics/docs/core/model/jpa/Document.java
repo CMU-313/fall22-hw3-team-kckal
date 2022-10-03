@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
@@ -20,10 +22,10 @@ import java.util.Date;
 @Entity
 @Table(name = "T_DOCUMENT")
 @SecondaryTables({
-    @SecondaryTable(name = "T_EDUCATION", foreignKey = @ForeignKey(name="EDU_IDDOC_C", foreignKeyDefinition =  "(EDU_IDDOC_C) references T_DOCUMENT")),
-    @SecondaryTable(name = "T_EXPERIENCE", foreignKey= @ForeignKey(name="EXP_IDDOC_C", foreignKeyDefinition =  "(EXP_IDDOC_C) references T_DOCUMENT"))
+@SecondaryTable(name = "T_EDUCATION", foreignKey = @ForeignKey(name="EDU_IDDOC_C", foreignKeyDefinition =  "(EDU_IDDOC_C) references T_DOCUMENT (DOC_ID_C)")),
+ @SecondaryTable(name = "T_EXPERIENCE", foreignKey= @ForeignKey(name="EXP_IDDOC_C", foreignKeyDefinition =  "(EXP_IDDOC_C) references T_DOCUMENT (DOC_ID_C)"))
 })
-public class Document implements Loggable {
+ public class Document implements Loggable {
     /**
      * Document ID.
      */
@@ -127,11 +129,11 @@ public class Document implements Loggable {
     @Column(name = "DOC_DELETEDATE_D", table="T_DOCUMENT")
     private Date deleteDate;
 
-    @Id
+    // @Id
     @Column(name = "EDU_ID_C", length = 36, table="T_EDUCATION")
     private String eduId;
     
-    @Id
+    // @Id
     @Column(name = "EDU_IDDOC_C", length = 36, table="T_EDUCATION")
     private String eduDocId;
 
@@ -150,11 +152,11 @@ public class Document implements Loggable {
     @Column(name = "EDU_GPA", nullable = false, precision = 3, scale = 2, table = "T_EDUCATION")
     private double GPA;
 
-    @Id
+    // @Id
     @Column(name = "EXP_ID_C", length = 36, table="T_EXPERIENCE")
     private String expId;
 
-    @Id
+    // @Id
     @Column(name = "EXP_IDDOC_C", length = 36, table="T_EXPERIENCE")
     private String expDocId;
     
