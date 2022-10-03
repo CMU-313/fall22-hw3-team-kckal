@@ -377,7 +377,18 @@ public class LuceneIndexingHandler implements IndexingHandler {
             documentDto.setFileCount(fileCount == null ? 0 : fileCount.intValue());
             documentDto.setActiveRoute(o[i++] != null);
             documentDto.setCurrentStepName((String) o[i++]);
-            documentDto.setUpdateTimestamp(((Timestamp) o[i]).getTime());
+            documentDto.setUpdateTimestamp(((Timestamp) o[i++]).getTime());
+            documentDto.setUniversityName((String) o[i++]);
+            documentDto.setMajorName((String) o[i++]);
+            documentDto.setGraduationDate((Date) o[i++]);
+            documentDto.setGPA((Float) o[i++]);
+            documentDto.setCompanyName((String) o[i++]);
+            documentDto.setTitleName((String) o[i++]);
+            documentDto.setUniversityName((String) o[i++]);
+            documentDto.setTitleName((String) o[i++]);
+            documentDto.setJobDescription((String) o[i++]);
+            documentDto.setStartDate((Date) o[i++]);
+            documentDto.setEndDate((Date) o[i++]);
             documentDto.setHighlight(documentSearchMap.get(documentDto.getId()));
             documentDtoList.add(documentDto);
         }
