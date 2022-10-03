@@ -259,7 +259,7 @@ public class LuceneIndexingHandler implements IndexingHandler {
                 "join (select r.RTE_IDDOCUMENT_C idDocument, rs.RTP_IDROUTE_C idRoute, min(rs.RTP_ORDER_N) minOrder from T_ROUTE_STEP rs join T_ROUTE r on r.RTE_ID_C = rs.RTP_IDROUTE_C and r.RTE_DELETEDATE_D is null where rs.RTP_DELETEDATE_D is null and rs.RTP_ENDDATE_D is null group by rs.RTP_IDROUTE_C, r.RTE_IDDOCUMENT_C) rs3 on rs.RTP_IDROUTE_C = rs3.idRoute and rs.RTP_ORDER_N = rs3.minOrder " +
                 "where rs.RTP_IDTARGET_C in (:targetIdList)) rs2 on rs2.idDocument = d.DOC_ID_C ");
         sb.append(" left join T_EDUCATION edu on edu.EDU_IDDOC_C = d.DOC_ID_C");
-        sb.append(" left join T_EDUCATION exp on exp.EXP_IDDOC_C = d.DOC_ID_C")
+        sb.append(" left join T_EDUCATION exp on exp.EXP_IDDOC_C = d.DOC_ID_C");
 
         // Add search criterias
         if (criteria.getTargetIdList() != null) {
@@ -381,7 +381,7 @@ public class LuceneIndexingHandler implements IndexingHandler {
             documentDto.setUniversityName((String) o[i++]);
             documentDto.setMajorName((String) o[i++]);
             documentDto.setGraduationDate((Date) o[i++]);
-            documentDto.setGPA((Float) o[i++]);
+            documentDto.setGPA((Double) o[i++]);
             documentDto.setCompanyName((String) o[i++]);
             documentDto.setTitleName((String) o[i++]);
             documentDto.setUniversityName((String) o[i++]);
