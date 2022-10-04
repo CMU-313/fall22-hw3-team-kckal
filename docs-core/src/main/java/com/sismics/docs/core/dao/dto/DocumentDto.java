@@ -125,7 +125,7 @@ public class DocumentDto {
 
     private Date graduationDate;
 
-    private double GPA;
+    private String GPA;
 
     private String expId;
 
@@ -350,11 +350,11 @@ public class DocumentDto {
     }
 
 
-    public Double getGPA() {
+    public String getGPA() {
         return GPA;
     }
 
-    public void setGPA(Double GPA) {
+    public void setGPA(String GPA) {
         this.GPA = GPA;
     }
     

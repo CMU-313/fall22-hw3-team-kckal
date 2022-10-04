@@ -381,7 +381,7 @@ public class LuceneIndexingHandler implements IndexingHandler {
             documentDto.setUniversityName((String) o[i++]);
             documentDto.setMajorName((String) o[i++]);
             documentDto.setGraduationDate((Date) o[i++]);
-            documentDto.setGPA((Double) o[i++]);
+            documentDto.setGPA((String) o[i++]);
             documentDto.setCompanyName((String) o[i++]);
             documentDto.setTitleName((String) o[i++]);
             documentDto.setUniversityName((String) o[i++]);
