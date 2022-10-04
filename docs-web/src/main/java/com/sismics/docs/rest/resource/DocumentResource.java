@@ -826,7 +826,7 @@ public class DocumentResource extends BaseResource {
             @FormParam("university_name") String universityName,
             @FormParam("major") String major,
             @FormParam("graduation_date") String graduationDateStr,
-            @FormParam("gpa") Float gpa,
+            @FormParam("gpa") String gpa,
             @FormParam("company_name") String companyName,
             @FormParam("title_name") String titleName,
             @FormParam("job_description") String jobDescription,
@@ -858,6 +858,7 @@ public class DocumentResource extends BaseResource {
 
         universityName = ValidationUtil.validateLength(universityName, "university_name", 1, 100, false);
         major = ValidationUtil.validateLength(major, "major", 1, 100, false);
+        gpa = ValidationUtil.validateLength(gpa, "gpa", 1, 4, false);
         companyName = ValidationUtil.validateLength(companyName, "company_name", 1, 100, false);
         titleName = ValidationUtil.validateLength(titleName, "title_name", 1, 100, false);
         jobDescription = ValidationUtil.validateLength(jobDescription, "job_description", 1, 1000, false);
