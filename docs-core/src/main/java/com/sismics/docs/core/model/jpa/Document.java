@@ -145,14 +145,14 @@ import java.util.Date;
     private String majorName;
 
 
-    @Column(name = "EDU_GRADE_DATE_D", nullable = false,  table = "T_EDUCATION")
+    @Column(name = "EDU_GRAD_DATE_D", nullable = false,  table = "T_EDUCATION")
     private Date graduationDate;
 
 
     @Column(name = "EDU_GPA", nullable = false, precision = 3, scale = 2, table = "T_EDUCATION")
     private String GPA;
 
-    // @Id
+    // @id
     @Column(name = "EXP_ID_C", length = 36, table="T_EXPERIENCE")
     private String expId;
 

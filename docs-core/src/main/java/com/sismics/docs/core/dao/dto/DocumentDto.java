@@ -123,7 +123,7 @@ public class DocumentDto {
     private String majorName;
 
 
-    private Date graduationDate;
+    private Long graduationDate;
 
     private String GPA;
 
@@ -140,10 +140,10 @@ public class DocumentDto {
     private String jobDescription;
 
 
-    private Date startDate;
+    private Long startDate;
 
 
-    private Date endDate;
+    private Long endDate;
 
     public String getId() {
         return id;
@@ -341,11 +341,11 @@ public class DocumentDto {
         this.majorName = majorName;
     }
 
-    public Date getGraduationDate() {
+    public long getGraduationDate() {
         return graduationDate;
     }
 
-    public void setGraduationDate(Date graduationDate) {
+    public void setGraduationDate(Long graduationDate) {
         this.graduationDate = graduationDate;
     }
 
@@ -395,20 +395,20 @@ public class DocumentDto {
 
 
 
-  public Date getStartDate() {
+  public Long getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Long startDate) {
         this.startDate = startDate;
     }
     
 
-  public Date getEndDate() {
+  public Long getEndDate() {
     return endDate;
 }
 
-public void setEndDate(Date endDate) {
+public void setEndDate(Long endDate) {
     this.endDate = endDate;
 }
 

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.MessageFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -118,6 +119,10 @@ public class DocumentResource extends BaseResource {
             MONTH_PARSER,
             DAY_PARSER};
     private static final DateTimeFormatter DATE_FORMATTER = new DateTimeFormatterBuilder().append( null, DATE_PARSERS).toFormatter();
+    private String graduationDateValue = "";
+    private String startDateValue = "";
+    private String endDateValue = "";
+
 
     /**
      * Returns a document.
@@ -144,7 +149,7 @@ public class DocumentResource extends BaseResource {
      * @apiSuccess {String} university_name Applicant university name
      * @apiSuccess {String} major Applicant major
      * @apiSuccess {String} graduation_date Applicant graduation date (timestamp)
-     * @apiSuccess {Number} gpa Applicant Grade point average
+     * @apiSuccess {String} gpa Applicant Grade point average
      * @apiSuccess {String} company_name Company name
      * @apiSuccess {String} title_name Title name
      * @apiSuccess {String} job_description Description of job
@@ -437,7 +442,7 @@ public class DocumentResource extends BaseResource {
      * @apiSuccess {String} documents.university_name Applicant university name
      * @apiSuccess {String} documents.major Applicant major
      * @apiSuccess {String} documents.graduation_date Applicant graduation date (timestamp)
-     * @apiSuccess {Number} documents.gpa Applicant Grade point average
+     * @apiSuccess {String} documents.gpa Applicant Grade point average
      * @apiSuccess {String} documents.company_name Company name
      * @apiSuccess {String} documents.title_name Title name
      * @apiSuccess {String} documents.job_description Description of job
@@ -762,7 +767,7 @@ public class DocumentResource extends BaseResource {
      * @apiParam {String} [university_name] Applicant University Name
      * @apiParam {String} [major] Applicant major
      * @apiParam {String} [graduation_date] Applicant graduation date (timestamp)
-     * @apiParam {Number} [gpa] Applicant Grade point average
+     * @apiParam {String} [gpa] Applicant Grade point average
      * @apiParam {String} [company_name] Company name
      * @apiParam {String} [title_name] Title name
      * @apiParam {String} [job_description] Description of job
@@ -826,7 +831,7 @@ public class DocumentResource extends BaseResource {
             @FormParam("university_name") String universityName,
             @FormParam("major") String major,
             @FormParam("graduation_date") String graduationDateStr,
-            @FormParam("gpa") Float gpa,
+            @FormParam("gpa") String gpa,
             @FormParam("company_name") String companyName,
             @FormParam("title_name") String titleName,
             @FormParam("job_description") String jobDescription,
@@ -862,9 +867,7 @@ public class DocumentResource extends BaseResource {
         titleName = ValidationUtil.validateLength(titleName, "title_name", 1, 100, false);
         jobDescription = ValidationUtil.validateLength(jobDescription, "job_description", 1, 1000, false);
         
-        Date graduationDate = ValidationUtil.validateDate(graduationDateStr, "graduation_date", true);
-        Date startDate = ValidationUtil.validateDate(startDateStr, "start_date", true);
-        Date endDate = ValidationUtil.validateDate(endDateStr, "end_date", true);
+
 
         subject = ValidationUtil.validateLength(subject, "subject", 0, 500, true);
         identifier = ValidationUtil.validateLength(identifier, "identifier", 0, 500, true);
@@ -879,6 +882,14 @@ public class DocumentResource extends BaseResource {
             throw new ClientException("ValidationError", MessageFormat.format("{0} is not a supported language", language));
         }
 
+     
+        graduationDateValue =  Long.toString(Instant.parse( graduationDateStr ).getEpochSecond())+"000";
+        startDateValue =  Long.toString(Instant.parse( startDateStr ).getEpochSecond())+"000";
+        endDateValue =  Long.toString(Instant.parse( endDateStr ).getEpochSecond())+"000";
+
+        Date graduationDate = ValidationUtil.validateDate(graduationDateValue, "graduation_date", true);
+        Date startDate = ValidationUtil.validateDate(startDateValue, "start_date", true);
+        Date endDate = ValidationUtil.validateDate(endDateValue, "end_date", true);
         // Create the document
         Document document = new Document();
         document.setUserId(principal.getId());
