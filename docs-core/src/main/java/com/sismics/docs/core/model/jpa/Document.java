@@ -150,7 +150,7 @@ import java.util.Date;
 
 
     @Column(name = "EDU_GPA", nullable = false, precision = 3, scale = 2, table = "T_EDUCATION")
-    private double GPA;
+    private Float GPA;
 
     // @Id
     @Column(name = "EXP_ID_C", length = 36, table="T_EXPERIENCE")
@@ -353,11 +353,11 @@ import java.util.Date;
     }
 
 
-    public Double getGPA() {
+    public Float getGPA() {
         return GPA;
     }
 
-    public void setGPA(Double GPA) {
+    public void setGPA(Float GPA) {
         this.GPA = GPA;
     }
     
