@@ -244,8 +244,7 @@ public class LuceneIndexingHandler implements IndexingHandler {
         sb.append(" s.count c5, ");
         sb.append(" f.count c6, ");
         sb.append(" rs2.RTP_ID_C c7, rs2.RTP_NAME_C, d.DOC_UPDATEDATE_D c8, ");
-        sb.append(" edu.EDU_ID_C, edu.EDU_NAME_C, edu.EDU_MAJOR_C, edu.EDU_GRAD_DATE_D,edu.EDU_GPA,");
-        sb.append(" exp.EXP_ID_C, exp.EXP_COMPANY_C, exp.EXP_ROLE_C, exp.EXP_DESCRIP_C, exp.EXP_START_DATE_D, exp.EXP_END_DATE_D");
+        sb.append(" d.EDU_NAME_C c9, d.EDU_MAJOR_C c10, d.EDU_GRAD_DATE_D c11, d.EDU_GPA c12");
         sb.append(" from T_DOCUMENT d ");
         sb.append(" left join (SELECT count(s.SHA_ID_C) count, ac.ACL_SOURCEID_C " +
                 "   FROM T_SHARE s, T_ACL ac " +
@@ -378,8 +377,7 @@ public class LuceneIndexingHandler implements IndexingHandler {
             documentDto.setUpdateTimestamp(((Timestamp) o[i++]).getTime());
             documentDto.setUniversityName((String) o[i++]);
             documentDto.setMajorName((String) o[i++]);
-            //CHANGE HERE
-            documentDto.setGraduationDate(((Timestamp)o[11]).getTime());
+            documentDto.setGraduationDate((Date) o[i++]);
             documentDto.setGPA((String) o[i++]);
             documentDto.setHighlight(documentSearchMap.get(documentDto.getId()));
             documentDtoList.add(documentDto);
