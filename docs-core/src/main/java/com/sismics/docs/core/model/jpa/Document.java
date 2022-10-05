@@ -4,13 +4,7 @@ import com.google.common.base.MoreObjects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
-import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -27,119 +21,119 @@ import java.util.Date;
      * Document ID.
      */
     @Id
-    @Column(name = "DOC_ID_C", length = 36, table="T_DOCUMENT")
+    @Column(name = "DOC_ID_C", length = 36)
     private String id;
     
     /**
      * User ID.
      */
-    @Column(name = "DOC_IDUSER_C", nullable = false, length = 36, table="T_DOCUMENT")
+    @Column(name = "DOC_IDUSER_C", nullable = false, length = 36)
     private String userId;
     
     /**
      * Main file ID.
      */
-    @Column(name = "DOC_IDFILE_C", length = 36, table="T_DOCUMENT")
+    @Column(name = "DOC_IDFILE_C", length = 36)
     private String fileId;
 
     /**
      * Language (ISO 639-9).
      */
-    @Column(name = "DOC_LANGUAGE_C", nullable = false, length = 3, table="T_DOCUMENT")
+    @Column(name = "DOC_LANGUAGE_C", nullable = false, length = 3)
     private String language;
     
     /**
      * Title.
      */
-    @Column(name = "DOC_TITLE_C", nullable = false, length = 100, table="T_DOCUMENT")
+    @Column(name = "DOC_TITLE_C", nullable = false, length = 100)
     private String title;
     
     /**
      * Description.
      */
-    @Column(name = "DOC_DESCRIPTION_C", length = 4000, table="T_DOCUMENT")
+    @Column(name = "DOC_DESCRIPTION_C", length = 4000)
     private String description;
     
     /**
      * Subject.
      */
-    @Column(name = "DOC_SUBJECT_C", length = 500, table="T_DOCUMENT")
+    @Column(name = "DOC_SUBJECT_C", length = 500)
     private String subject;
     
     /**
      * Identifer.
      */
-    @Column(name = "DOC_IDENTIFIER_C", length = 500, table="T_DOCUMENT")
+    @Column(name = "DOC_IDENTIFIER_C", length = 500)
     private String identifier;
     
     /**
      * Publisher.
      */
-    @Column(name = "DOC_PUBLISHER_C", length = 500, table="T_DOCUMENT")
+    @Column(name = "DOC_PUBLISHER_C", length = 500)
     private String publisher;
     
     /**
      * Format.
      */
-    @Column(name = "DOC_FORMAT_C", length = 500, table="T_DOCUMENT")
+    @Column(name = "DOC_FORMAT_C", length = 500)
     private String format;
     
     /**
      * Source.
      */
-    @Column(name = "DOC_SOURCE_C", length = 500, table="T_DOCUMENT")
+    @Column(name = "DOC_SOURCE_C", length = 500)
     private String source;
     
     /**
      * Type.
      */
-    @Column(name = "DOC_TYPE_C", length = 100, table="T_DOCUMENT")
+    @Column(name = "DOC_TYPE_C", length = 100)
     private String type;
     
     /**
      * Coverage.
      */
-    @Column(name = "DOC_COVERAGE_C", length = 100, table="T_DOCUMENT")
+    @Column(name = "DOC_COVERAGE_C", length = 100)
     private String coverage;
     
     /**
      * Rights.
      */
-    @Column(name = "DOC_RIGHTS_C", length = 100, table="T_DOCUMENT")
+    @Column(name = "DOC_RIGHTS_C", length = 100)
     private String rights;
     
     /**
      * Creation date.
      */
-    @Column(name = "DOC_CREATEDATE_D", nullable = false, table="T_DOCUMENT")
+    @Column(name = "DOC_CREATEDATE_D", nullable = false)
     private Date createDate;
 
     /**
      * Creation date.
      */
-    @Column(name = "DOC_UPDATEDATE_D", nullable = false, table="T_DOCUMENT")
+    @Column(name = "DOC_UPDATEDATE_D", nullable = false)
     private Date updateDate;
 
     /**
      * Deletion date.
      */
-    @Column(name = "DOC_DELETEDATE_D", table="T_DOCUMENT")
+    @Column(name = "DOC_DELETEDATE_D")
     private Date deleteDate;
 
 
-    @Column(name = "EDU_NAME_C", nullable = false, length = 100, table = "T_EDUCATION")
+    @Column(name = "EDU_NAME_C", nullable = false, length = 100)
     private String universityName;
 
 
-    @Column(name = "EDU_MAJOR_C", nullable = false, length = 100, table = "T_EDUCATION")
+    @Column(name = "EDU_MAJOR_C", nullable = false, length = 100)
     private String majorName;
 
 
-    @Column(name = "EDU_GRAD_DATE_D", nullable = false,  table = "T_EDUCATION")
+    @Column(name = "EDU_GRAD_DATE_D", nullable = false)
     private Date graduationDate;
 
 
-    @Column(name = "EDU_GPA", nullable = false, table = "T_EDUCATION")
+    @Column(name = "EDU_GPA", nullable = false)
     private String GPA;
     
     
