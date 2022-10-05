@@ -2,9 +2,14 @@ package com.sismics.docs.core.dao.jpa;
 
 import com.sismics.docs.BaseTransactionalTest;
 import com.sismics.docs.core.dao.UserDao;
+import com.sismics.docs.core.dao.DocumentDao;
+import com.sismics.docs.core.model.jpa.Document;
 import com.sismics.docs.core.model.jpa.User;
 import com.sismics.docs.core.util.TransactionUtil;
 import com.sismics.docs.core.util.authentication.InternalAuthenticationHandler;
+
+import java.util.Date;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -35,5 +40,21 @@ public class TestJpa extends BaseTransactionalTest {
 
         // Authenticate using the database
         Assert.assertNotNull(new InternalAuthenticationHandler().authenticate("username", "12345678"));
+
+        Document doc = new Document();
+        doc.setTitle("Resume");
+        doc.setGraduationDate(new Date());
+        doc.setCreateDate(new Date());
+        doc.setLanguage("eng");
+        doc.setUniversityName("Carnegie Mellon");
+        doc.setMajorName("Information Systems");
+        doc.setGPA("4.00");
+        
+        TransactionUtil.commit();
+
+        // Search a doc by  ID
+        Assert.assertNotNull(doc);
+        Assert.assertEquals("Carnegie Mellon", doc.getUniversityName());
     }
+
 }
