@@ -125,7 +125,6 @@ public class Document implements Loggable {
     @Column(name = "DOC_DELETEDATE_D", table="T_DOCUMENT")
     private Date deleteDate;
 
-<<<<<<< HEAD
 
     @Column(name = "EDU_NAME_C", nullable = false, length = 100)
     private String universityName;
@@ -142,59 +141,6 @@ public class Document implements Loggable {
     @Column(name = "EDU_GPA", nullable = false)
     private String GPA;
     
-=======
-    // @Id
-    @Column(name = "EDU_ID_C", length = 36, table="T_EDUCATION")
-    private String eduId;
-    
-    // @Id
-    @Column(name = "EDU_IDDOC_C", length = 36, table="T_EDUCATION")
-    private String eduDocId;
-
-    @Column(name = "EDU_NAME_C", nullable = false, length = 100, table = "T_EDUCATION")
-    private String universityName;
-
-
-    @Column(name = "EDU_MAJOR_C", nullable = false, length = 100, table = "T_EDUCATION")
-    private String majorName;
-
-
-    @Column(name = "EDU_GRADE_DATE_D", nullable = false,  table = "T_EDUCATION")
-    private Date graduationDate;
-
-
-    @Column(name = "EDU_GPA", nullable = false, precision = 3, scale = 2, table = "T_EDUCATION")
-    private double GPA;
-
-    // @Id
-    @Column(name = "EXP_ID_C", length = 36, table="T_EXPERIENCE")
-    private String expId;
-
-    // @Id
-    @Column(name = "EXP_IDDOC_C", length = 36, table="T_EXPERIENCE")
-    private String expDocId;
-    
-    @Column(name = "EXP_COMPANY_C", nullable = false, length = 100, table = "T_EXPERIENCE")
-    private String companyName;
-
-    @Column(name = "EXP_ROLE_C", nullable = false, length = 100, table = "T_EXPERIENCE")
-    private String titleName;
-
-
-    @Column(name = "EXP_DESCRIP_C", nullable = false, length = 100, table = "T_EXPERIENCE")
-    private String jobDescription;
-
-
-    @Column(name = "EXP_START_DATE_D", nullable = false,  table = "T_EXPERIENCE")
-    private Date startDate;
-
-
-    @Column(name = " EXP_END_DATE_D", nullable = false, precision = 3, scale = 2, table = "T_EXPERIENCE")
-    private Date endDate;
-
-
-
->>>>>>> 6a79d3fd19ebd14798c2c9c196ef3b6367f09cc3
     
     public String getId() {
         return id;
@@ -335,17 +281,6 @@ public class Document implements Loggable {
     }
 
 
-<<<<<<< HEAD
-=======
-    public String getEduId() {
-        return eduId;
-    }
-
-    public void setEduId(String eduId) {
-        this.eduId = eduId;
-    }
-
->>>>>>> 6a79d3fd19ebd14798c2c9c196ef3b6367f09cc3
     public String getUniversityName() {
         return universityName;
     }
@@ -371,7 +306,6 @@ public class Document implements Loggable {
     }
 
 
-<<<<<<< HEAD
     public String getGPA() {
         return GPA;
     }
@@ -379,72 +313,6 @@ public class Document implements Loggable {
     public void setGPA(String GPA) {
         this.GPA = GPA;
     }
-=======
-    public Double getGPA() {
-        return GPA;
-    }
-
-    public void setGPA(Double GPA) {
-        this.GPA = GPA;
-    }
-    
-
-    public String getExpId() {
-        return expId;
-    }
-
-    public void setExpId(String expId) {
-        this.expId = expId;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-
-    public String getTitleName() {
-        return titleName;
-    }
-
-    public void setTitleName(String titleName) {
-        this.titleName = titleName;
-    }
-
-    public String getJobDescription() {
-        return jobDescription;
-    }
-
-    public void setJobDescription(String jobDescription)
-     {
-        this.jobDescription = jobDescription;
-    }
-
-
-
-  public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-    
-
-  public Date getEndDate() {
-    return endDate;
-}
-
-public void setEndDate(Date endDate) {
-    this.endDate = endDate;
-}
-
-
-
->>>>>>> 6a79d3fd19ebd14798c2c9c196ef3b6367f09cc3
 
 
     @Override

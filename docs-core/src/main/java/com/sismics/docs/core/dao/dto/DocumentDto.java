@@ -113,19 +113,10 @@ public class DocumentDto {
      */
     private String highlight;
 
-<<<<<<< HEAD
-=======
-
-    private String eduId;
-    
-    private String eduDocId;
-
->>>>>>> 6a79d3fd19ebd14798c2c9c196ef3b6367f09cc3
     private String universityName;
 
     private String majorName;
 
-<<<<<<< HEAD
     private Date graduationDate;
 
     private String GPA;
@@ -133,31 +124,6 @@ public class DocumentDto {
 
 
 
-=======
-
-    private Date graduationDate;
-
-    private double GPA;
-
-    private String expId;
-
-
-    private String expDocId;
-    
-    private String companyName;
-
-    private String titleName;
-
-
-    private String jobDescription;
-
-
-    private Date startDate;
-
-
-    private Date endDate;
-
->>>>>>> 6a79d3fd19ebd14798c2c9c196ef3b6367f09cc3
     public String getId() {
         return id;
     }
@@ -329,18 +295,6 @@ public class DocumentDto {
         return this;
     }
 
-<<<<<<< HEAD
-=======
-
-    public String getEduId() {
-        return eduId;
-    }
-
-    public void setEduId(String eduId) {
-        this.eduId = eduId;
-    }
-
->>>>>>> 6a79d3fd19ebd14798c2c9c196ef3b6367f09cc3
     public String getUniversityName() {
         return universityName;
     }
@@ -365,7 +319,6 @@ public class DocumentDto {
         this.graduationDate = graduationDate;
     }
 
-<<<<<<< HEAD
     public String getGPA() {
         return GPA;
     }
@@ -374,71 +327,4 @@ public class DocumentDto {
         this.GPA = GPA;
     }
  
-=======
-
-    public Double getGPA() {
-        return GPA;
-    }
-
-    public void setGPA(Double GPA) {
-        this.GPA = GPA;
-    }
-    
-
-    public String getExpId() {
-        return expId;
-    }
-
-    public void setExpId(String expId) {
-        this.expId = expId;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-
-    public String getTitleName() {
-        return titleName;
-    }
-
-    public void setTitleName(String titleName) {
-        this.titleName = titleName;
-    }
-
-    public String getJobDescription() {
-        return jobDescription;
-    }
-
-    public void setJobDescription(String jobDescription)
-     {
-        this.jobDescription = jobDescription;
-    }
-
-
-
-  public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-    
-
-  public Date getEndDate() {
-    return endDate;
-}
-
-public void setEndDate(Date endDate) {
-    this.endDate = endDate;
-}
-
-
-
->>>>>>> 6a79d3fd19ebd14798c2c9c196ef3b6367f09cc3
 }
