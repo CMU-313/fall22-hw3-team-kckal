@@ -145,11 +145,6 @@ public class DocumentResource extends BaseResource {
      * @apiSuccess {String} major Applicant major
      * @apiSuccess {String} graduation_date Applicant graduation date (timestamp)
      * @apiSuccess {Number} gpa Applicant Grade point average
-     * @apiSuccess {String} company_name Company name
-     * @apiSuccess {String} title_name Title name
-     * @apiSuccess {String} job_description Description of job
-     * @apiSuccess {String} start_date Start date of job (timestamp)
-     * @apiSuccess {String} end_date End date of job (timestamp)
      * 
      * @apiSuccess {String} subject Subject
      * @apiSuccess {String} identifier Identifier
@@ -223,11 +218,6 @@ public class DocumentResource extends BaseResource {
                 .add("major", documentDto.getMajorName())
                 .add("graduation_date", documentDto.getGraduationDate())
                 .add("gpa", documentDto.getGPA())
-                .add("company_name", documentDto.getCompanyName())
-                .add("title_name", documentDto.getTitleName())
-                .add("job_description", documentDto.getJobDescription())
-                .add("start_date", documentDto.getStartDate())
-                .add("end_date", documentDto.getEndDate())
                 .add("language", documentDto.getLanguage())
                 .add("shared", documentDto.getShared())
                 .add("file_count", documentDto.getFileCount());
@@ -438,11 +428,6 @@ public class DocumentResource extends BaseResource {
      * @apiSuccess {String} documents.major Applicant major
      * @apiSuccess {String} documents.graduation_date Applicant graduation date (timestamp)
      * @apiSuccess {Number} documents.gpa Applicant Grade point average
-     * @apiSuccess {String} documents.company_name Company name
-     * @apiSuccess {String} documents.title_name Title name
-     * @apiSuccess {String} documents.job_description Description of job
-     * @apiSuccess {String} documents.start_date Start date of job (timestamp)
-     * @apiSuccess {String} documents.end_date End date of job (timestamp)
      * 
      * @apiSuccess {Boolean} documents.shared True if the document is shared
      * @apiSuccess {Boolean} documents.active_route True if a route is active on this document
@@ -534,11 +519,6 @@ public class DocumentResource extends BaseResource {
                     .add("major", documentDto.getMajorName())
                     .add("graduation_date", documentDto.getGraduationDate())
                     .add("gpa", documentDto.getGPA())
-                    .add("company_name", documentDto.getCompanyName())
-                    .add("title_name", documentDto.getTitleName())
-                    .add("job_description", documentDto.getJobDescription())
-                    .add("start_date", documentDto.getStartDate())
-                    .add("end_date", documentDto.getEndDate())
 
                     .add("language", documentDto.getLanguage())
                     .add("shared", documentDto.getShared())
@@ -763,11 +743,6 @@ public class DocumentResource extends BaseResource {
      * @apiParam {String} [major] Applicant major
      * @apiParam {String} [graduation_date] Applicant graduation date (timestamp)
      * @apiParam {Number} [gpa] Applicant Grade point average
-     * @apiParam {String} [company_name] Company name
-     * @apiParam {String} [title_name] Title name
-     * @apiParam {String} [job_description] Description of job
-     * @apiParam {String} [start_date] Start date of job (timestamp)
-     * @apiParam {String} [end_date] End date of job (timestamp)
      * 
      * @apiParam {String} [subject] Subject
      * @apiParam {String} [identifier] Identifier
@@ -796,11 +771,6 @@ public class DocumentResource extends BaseResource {
      * @param major Applicant major
      * @param graduationDateStr Applicant graduation date (timestamp)
      * @param gpa Applicant Grade point average
-     * @param companyName Company name
-     * @param titleName Title name
-     * @param jobDescription Description of job
-     * @param startDateStr Start date of job (timestamp)
-     * @param endDateStr End date of job (timestamp)
      * 
      * @param subject Subject
      * @param identifier Identifier
@@ -827,11 +797,6 @@ public class DocumentResource extends BaseResource {
             @FormParam("major") String major,
             @FormParam("graduation_date") String graduationDateStr,
             @FormParam("gpa") String gpa,
-            @FormParam("company_name") String companyName,
-            @FormParam("title_name") String titleName,
-            @FormParam("job_description") String jobDescription,
-            @FormParam("start_date") String startDateStr,
-            @FormParam("end_date") String endDateStr,
 
             @FormParam("subject") String subject,
             @FormParam("identifier") String identifier,
@@ -859,13 +824,8 @@ public class DocumentResource extends BaseResource {
         universityName = ValidationUtil.validateLength(universityName, "university_name", 1, 100, false);
         major = ValidationUtil.validateLength(major, "major", 1, 100, false);
         gpa = ValidationUtil.validateLength(gpa, "gpa", 1, 4, false);
-        companyName = ValidationUtil.validateLength(companyName, "company_name", 1, 100, false);
-        titleName = ValidationUtil.validateLength(titleName, "title_name", 1, 100, false);
-        jobDescription = ValidationUtil.validateLength(jobDescription, "job_description", 1, 1000, false);
         
         Date graduationDate = ValidationUtil.validateDate(graduationDateStr, "graduation_date", true);
-        Date startDate = ValidationUtil.validateDate(startDateStr, "start_date", true);
-        Date endDate = ValidationUtil.validateDate(endDateStr, "end_date", true);
 
         subject = ValidationUtil.validateLength(subject, "subject", 0, 500, true);
         identifier = ValidationUtil.validateLength(identifier, "identifier", 0, 500, true);
@@ -904,11 +864,6 @@ public class DocumentResource extends BaseResource {
         document.setMajorName(major);
         document.setGraduationDate(graduationDate);
         document.setGPA(gpa);
-        document.setCompanyName(companyName);
-        document.setTitleName(titleName);
-        document.setJobDescription(jobDescription);
-        document.setStartDate(startDate);
-        document.setEndDate(endDate);
 
         // Save the document, create the base ACLs
         document = DocumentUtil.createDocument(document, principal.getId());
