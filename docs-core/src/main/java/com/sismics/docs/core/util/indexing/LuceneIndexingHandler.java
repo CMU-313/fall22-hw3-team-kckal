@@ -380,15 +380,8 @@ public class LuceneIndexingHandler implements IndexingHandler {
             documentDto.setUpdateTimestamp(((Timestamp) o[i++]).getTime());
             documentDto.setUniversityName((String) o[i++]);
             documentDto.setMajorName((String) o[i++]);
-            documentDto.setGraduationDate((Date) o[i++]);
+            documentDto.setGraduationDate((String) o[i++]);
             documentDto.setGPA((Double) o[i++]);
-            documentDto.setCompanyName((String) o[i++]);
-            documentDto.setTitleName((String) o[i++]);
-            documentDto.setUniversityName((String) o[i++]);
-            documentDto.setTitleName((String) o[i++]);
-            documentDto.setJobDescription((String) o[i++]);
-            documentDto.setStartDate((Date) o[i++]);
-            documentDto.setEndDate((Date) o[i++]);
             documentDto.setHighlight(documentSearchMap.get(documentDto.getId()));
             documentDtoList.add(documentDto);
         }
