@@ -243,9 +243,7 @@ public class LuceneIndexingHandler implements IndexingHandler {
         StringBuilder sb = new StringBuilder("select distinct d.DOC_ID_C c0, d.DOC_TITLE_C c1, d.DOC_DESCRIPTION_C c2, d.DOC_CREATEDATE_D c3, d.DOC_LANGUAGE_C c4, d.DOC_IDFILE_C, ");
         sb.append(" s.count c5, ");
         sb.append(" f.count c6, ");
-        sb.append(" rs2.RTP_ID_C c7, rs2.RTP_NAME_C, d.DOC_UPDATEDATE_D c8, ");
-        sb.append(" edu.EDU_ID_C, edu.EDU_NAME_C, edu.EDU_MAJOR_C, edu.EDU_GRAD_DATE_D,edu.EDU_GPA,");
-        sb.append(" exp.EXP_ID_C, exp.EXP_COMPANY_C, exp.EXP_ROLE_C, exp.EXP_DESCRIP_C, exp.EXP_START_DATE_D, exp.EXP_END_DATE_D");
+        sb.append(" rs2.RTP_ID_C c7, rs2.RTP_NAME_C, d.DOC_UPDATEDATE_D c8 ");
         sb.append(" from T_DOCUMENT d ");
         sb.append(" left join (SELECT count(s.SHA_ID_C) count, ac.ACL_SOURCEID_C " +
                 "   FROM T_SHARE s, T_ACL ac " +
@@ -380,7 +378,7 @@ public class LuceneIndexingHandler implements IndexingHandler {
             documentDto.setUpdateTimestamp(((Timestamp) o[i++]).getTime());
             documentDto.setUniversityName((String) o[i++]);
             documentDto.setMajorName((String) o[i++]);
-            documentDto.setGraduationDate((String) o[i++]);
+            documentDto.setGraduationDate((Date) o[i++]);
             documentDto.setGPA((Double) o[i++]);
             documentDto.setHighlight(documentSearchMap.get(documentDto.getId()));
             documentDtoList.add(documentDto);
