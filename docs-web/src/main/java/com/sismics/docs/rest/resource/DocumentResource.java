@@ -96,6 +96,7 @@ import com.sismics.util.EmailUtil;
 import com.sismics.util.JsonUtil;
 import com.sismics.util.context.ThreadLocalContext;
 import com.sismics.util.mime.MimeType;
+import java.time.Instant;
 
 /**
  * Document REST resources.
@@ -118,7 +119,7 @@ public class DocumentResource extends BaseResource {
             MONTH_PARSER,
             DAY_PARSER};
     private static final DateTimeFormatter DATE_FORMATTER = new DateTimeFormatterBuilder().append( null, DATE_PARSERS).toFormatter();
-
+    private String graduationDateValue = "";
     /**
      * Returns a document.
      *
@@ -825,7 +826,8 @@ public class DocumentResource extends BaseResource {
         major = ValidationUtil.validateLength(major, "major", 1, 100, false);
         gpa = ValidationUtil.validateLength(gpa, "gpa", 1, 4, false);
         
-        Date graduationDate = ValidationUtil.validateDate(graduationDateStr, "graduation_date", true);
+        graduationDateValue =  Long.toString(Instant.parse( graduationDateStr ).getEpochSecond())+"000";
+        Date graduationDate = ValidationUtil.validateDate(graduationDateValue, "graduation_date", true);
 
         subject = ValidationUtil.validateLength(subject, "subject", 0, 500, true);
         identifier = ValidationUtil.validateLength(identifier, "identifier", 0, 500, true);
