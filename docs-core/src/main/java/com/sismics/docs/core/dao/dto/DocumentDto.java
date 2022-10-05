@@ -125,25 +125,7 @@ public class DocumentDto {
 
     private Long graduationDate;
 
-    private double GPA;
-
-    private String expId;
-
-
-    private String expDocId;
-    
-    private String companyName;
-
-    private String titleName;
-
-
-    private String jobDescription;
-
-
-    private Long startDate;
-
-
-    private Long endDate;
+    private String GPA;
 
     public String getId() {
         return id;
@@ -350,68 +332,12 @@ public class DocumentDto {
     }
 
 
-    public Double getGPA() {
+    public String getGPA() {
         return GPA;
     }
 
-    public void setGPA(Double GPA) {
+    public void setGPA(String GPA) {
         this.GPA = GPA;
     }
     
-
-    public String getExpId() {
-        return expId;
-    }
-
-    public void setExpId(String expId) {
-        this.expId = expId;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-
-    public String getTitleName() {
-        return titleName;
-    }
-
-    public void setTitleName(String titleName) {
-        this.titleName = titleName;
-    }
-
-    public String getJobDescription() {
-        return jobDescription;
-    }
-
-    public void setJobDescription(String jobDescription)
-     {
-        this.jobDescription = jobDescription;
-    }
-
-
-
-  public Long getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Long startDate) {
-        this.startDate = startDate;
-    }
-    
-
-  public Long getEndDate() {
-    return endDate;
-}
-
-public void setEndDate(Long endDate) {
-    this.endDate = endDate;
-}
-
-
-
 }
