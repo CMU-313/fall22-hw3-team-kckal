@@ -113,37 +113,16 @@ public class DocumentDto {
      */
     private String highlight;
 
-
-    private String eduId;
-    
-    private String eduDocId;
-
     private String universityName;
 
     private String majorName;
-
 
     private Date graduationDate;
 
     private double GPA;
 
-    private String expId;
 
 
-    private String expDocId;
-    
-    private String companyName;
-
-    private String titleName;
-
-
-    private String jobDescription;
-
-
-    private Date startDate;
-
-
-    private Date endDate;
 
     public String getId() {
         return id;
@@ -316,15 +295,6 @@ public class DocumentDto {
         return this;
     }
 
-
-    public String getEduId() {
-        return eduId;
-    }
-
-    public void setEduId(String eduId) {
-        this.eduId = eduId;
-    }
-
     public String getUniversityName() {
         return universityName;
     }
@@ -349,7 +319,6 @@ public class DocumentDto {
         this.graduationDate = graduationDate;
     }
 
-
     public Double getGPA() {
         return GPA;
     }
@@ -357,61 +326,5 @@ public class DocumentDto {
     public void setGPA(Double GPA) {
         this.GPA = GPA;
     }
-    
-
-    public String getExpId() {
-        return expId;
-    }
-
-    public void setExpId(String expId) {
-        this.expId = expId;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-
-    public String getTitleName() {
-        return titleName;
-    }
-
-    public void setTitleName(String titleName) {
-        this.titleName = titleName;
-    }
-
-    public String getJobDescription() {
-        return jobDescription;
-    }
-
-    public void setJobDescription(String jobDescription)
-     {
-        this.jobDescription = jobDescription;
-    }
-
-
-
-  public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-    
-
-  public Date getEndDate() {
-    return endDate;
-}
-
-public void setEndDate(Date endDate) {
-    this.endDate = endDate;
-}
-
-
-
+ 
 }
