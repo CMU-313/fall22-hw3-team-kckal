@@ -117,13 +117,6 @@ public class DocumentDto {
 
     private String majorName;
 
-<<<<<<< HEAD
-
-    private Long graduationDate;
-
-    private String GPA;
-
-=======
     private Date graduationDate;
 
     private String GPA;
@@ -131,7 +124,6 @@ public class DocumentDto {
 
 
 
->>>>>>> 13265c43f77e75c527d1b7df9e2e53bc6187df66
     public String getId() {
         return id;
     }
