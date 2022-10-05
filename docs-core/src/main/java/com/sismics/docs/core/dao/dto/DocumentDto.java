@@ -113,20 +113,25 @@ public class DocumentDto {
      */
     private String highlight;
 
-
-    private String eduId;
-    
-    private String eduDocId;
-
     private String universityName;
 
     private String majorName;
 
+<<<<<<< HEAD
 
     private Long graduationDate;
 
     private String GPA;
 
+=======
+    private Date graduationDate;
+
+    private String GPA;
+
+
+
+
+>>>>>>> 13265c43f77e75c527d1b7df9e2e53bc6187df66
     public String getId() {
         return id;
     }
@@ -298,15 +303,6 @@ public class DocumentDto {
         return this;
     }
 
-
-    public String getEduId() {
-        return eduId;
-    }
-
-    public void setEduId(String eduId) {
-        this.eduId = eduId;
-    }
-
     public String getUniversityName() {
         return universityName;
     }
@@ -331,7 +327,6 @@ public class DocumentDto {
         this.graduationDate = graduationDate;
     }
 
-
     public String getGPA() {
         return GPA;
     }
@@ -339,5 +334,5 @@ public class DocumentDto {
     public void setGPA(String GPA) {
         this.GPA = GPA;
     }
-    
+ 
 }

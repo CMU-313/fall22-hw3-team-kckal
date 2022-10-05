@@ -21,6 +21,10 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "T_DOCUMENT")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 13265c43f77e75c527d1b7df9e2e53bc6187df66
  public class Document implements Loggable {
     /**
      * Document ID.
@@ -125,13 +129,6 @@ import java.util.Date;
     @Column(name = "DOC_DELETEDATE_D", table="T_DOCUMENT")
     private Date deleteDate;
 
-    // @Id
-    @Column(name = "EDU_ID_C", length = 36, table="T_EDUCATION")
-    private String eduId;
-    
-    // @Id
-    @Column(name = "EDU_IDDOC_C", length = 36, table="T_EDUCATION")
-    private String eduDocId;
 
     @Column(name = "EDU_NAME_C", nullable = false, length = 100, table = "T_EDUCATION")
     private String universityName;
@@ -141,14 +138,13 @@ import java.util.Date;
     private String majorName;
 
 
-    @Column(name = "EDU_GRADE_DATE_D", nullable = false,  table = "T_EDUCATION")
+    @Column(name = "EDU_GRAD_DATE_D", nullable = false,  table = "T_EDUCATION")
     private Date graduationDate;
 
 
-    @Column(name = "EDU_GPA", nullable = false, precision = 3, scale = 2, table = "T_EDUCATION")
+    @Column(name = "EDU_GPA", nullable = false, table = "T_EDUCATION")
     private String GPA;
-
-
+    
     
     public String getId() {
         return id;
@@ -289,14 +285,6 @@ import java.util.Date;
     }
 
 
-    public String getEduId() {
-        return eduId;
-    }
-
-    public void setEduId(String eduId) {
-        this.eduId = eduId;
-    }
-
     public String getUniversityName() {
         return universityName;
     }
@@ -329,7 +317,10 @@ import java.util.Date;
     public void setGPA(String GPA) {
         this.GPA = GPA;
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 13265c43f77e75c527d1b7df9e2e53bc6187df66
 
 
     @Override
