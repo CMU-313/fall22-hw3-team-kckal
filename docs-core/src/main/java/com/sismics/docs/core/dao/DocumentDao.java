@@ -127,7 +127,7 @@ public class DocumentDao {
         documentDto.setCreator((String) o[i++]);
         documentDto.setUniversityName((String) o[i++]);
         documentDto.setMajorName((String) o[i++]);
-        documentDto.setGraduationDate((Date) o[i++]);
+        documentDto.setGraduationDate(((Timestamp) o[i++]).getTime());
         documentDto.setGPA((String) o[i++]); 
         return documentDto;
     }

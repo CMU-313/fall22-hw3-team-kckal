@@ -21,11 +21,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "T_DOCUMENT")
-<<<<<<< HEAD
-=======
-
->>>>>>> 13265c43f77e75c527d1b7df9e2e53bc6187df66
- public class Document implements Loggable {
+public class Document implements Loggable {
     /**
      * Document ID.
      */
@@ -317,10 +313,6 @@ import java.util.Date;
     public void setGPA(String GPA) {
         this.GPA = GPA;
     }
-<<<<<<< HEAD
-    
-=======
->>>>>>> 13265c43f77e75c527d1b7df9e2e53bc6187df66
 
 
     @Override
