@@ -244,8 +244,8 @@ public class LuceneIndexingHandler implements IndexingHandler {
         sb.append(" s.count c5, ");
         sb.append(" f.count c6, ");
         sb.append(" rs2.RTP_ID_C c7, rs2.RTP_NAME_C, d.DOC_UPDATEDATE_D c8, ");
-        sb.append(" edu.EDU_ID_C, edu.EDU_NAME_C, edu.EDU_MAJOR_C, edu.EDU_GRAD_DATE_D,edu.EDU_GPA,");
-        sb.append(" exp.EXP_ID_C, exp.EXP_COMPANY_C, exp.EXP_ROLE_C, exp.EXP_DESCRIP_C, exp.EXP_START_DATE_D, exp.EXP_END_DATE_D");
+        sb.append(" doc.EDU_ID_C, doc.EDU_NAME_C, doc.EDU_MAJOR_C, doc.EDU_GRAD_DATE_D,doc.EDU_GPA,");
+        sb.append(" doc.EXP_ID_C, doc.EXP_COMPANY_C, doc.EXP_ROLE_C, doc.EXP_DESCRIP_C, doc.EXP_START_DATE_D, doc.EXP_END_DATE_D");
         sb.append(" from T_DOCUMENT d ");
         sb.append(" left join (SELECT count(s.SHA_ID_C) count, ac.ACL_SOURCEID_C " +
                 "   FROM T_SHARE s, T_ACL ac " +
@@ -258,8 +258,6 @@ public class LuceneIndexingHandler implements IndexingHandler {
                 "from T_ROUTE_STEP rs " +
                 "join (select r.RTE_IDDOCUMENT_C idDocument, rs.RTP_IDROUTE_C idRoute, min(rs.RTP_ORDER_N) minOrder from T_ROUTE_STEP rs join T_ROUTE r on r.RTE_ID_C = rs.RTP_IDROUTE_C and r.RTE_DELETEDATE_D is null where rs.RTP_DELETEDATE_D is null and rs.RTP_ENDDATE_D is null group by rs.RTP_IDROUTE_C, r.RTE_IDDOCUMENT_C) rs3 on rs.RTP_IDROUTE_C = rs3.idRoute and rs.RTP_ORDER_N = rs3.minOrder " +
                 "where rs.RTP_IDTARGET_C in (:targetIdList)) rs2 on rs2.idDocument = d.DOC_ID_C ");
-        sb.append(" left join T_EDUCATION edu on edu.EDU_IDDOC_C = d.DOC_ID_C");
-        sb.append(" left join T_EXPERIENCE exp on exp.EXP_IDDOC_C = d.DOC_ID_C");
 
         // Add search criterias
         if (criteria.getTargetIdList() != null) {
