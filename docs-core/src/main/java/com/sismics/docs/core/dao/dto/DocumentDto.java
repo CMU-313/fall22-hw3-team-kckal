@@ -117,7 +117,7 @@ public class DocumentDto {
 
     private String majorName;
 
-    private Date graduationDate;
+    private Long graduationDate;
 
     private String GPA;
 
