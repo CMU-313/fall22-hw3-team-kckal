@@ -323,7 +323,7 @@ public class DocumentDto {
         return GPA;
     }
 
-    public void setGPA(Double GPA) {
+    public void setGPA(String GPA) {
         this.GPA = GPA;
     }
  
