@@ -21,10 +21,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "T_DOCUMENT")
-@SecondaryTables({
-@SecondaryTable(name = "T_EDUCATION", foreignKey = @ForeignKey(name="EDU_IDDOC_C", foreignKeyDefinition =  "(EDU_IDDOC_C) references T_DOCUMENT (DOC_ID_C)")),
- @SecondaryTable(name = "T_EXPERIENCE", foreignKey= @ForeignKey(name="EXP_IDDOC_C", foreignKeyDefinition =  "(EXP_IDDOC_C) references T_DOCUMENT (DOC_ID_C)"))
-})
+
  public class Document implements Loggable {
     /**
      * Document ID.
@@ -129,13 +126,6 @@ import java.util.Date;
     @Column(name = "DOC_DELETEDATE_D", table="T_DOCUMENT")
     private Date deleteDate;
 
-    // @Id
-    @Column(name = "EDU_ID_C", length = 36, table="T_EDUCATION")
-    private String eduId;
-    
-    // @Id
-    @Column(name = "EDU_IDDOC_C", length = 36, table="T_EDUCATION")
-    private String eduDocId;
 
     @Column(name = "EDU_NAME_C", nullable = false, length = 100, table = "T_EDUCATION")
     private String universityName;
@@ -145,41 +135,13 @@ import java.util.Date;
     private String majorName;
 
 
-    @Column(name = "EDU_GRADE_DATE_D", nullable = false,  table = "T_EDUCATION")
+    @Column(name = "EDU_GRAD_DATE_D", nullable = false,  table = "T_EDUCATION")
     private Date graduationDate;
 
 
-    @Column(name = "EDU_GPA", nullable = false, precision = 3, scale = 2, table = "T_EDUCATION")
-    private double GPA;
-
-    // @Id
-    @Column(name = "EXP_ID_C", length = 36, table="T_EXPERIENCE")
-    private String expId;
-
-    // @Id
-    @Column(name = "EXP_IDDOC_C", length = 36, table="T_EXPERIENCE")
-    private String expDocId;
+    @Column(name = "EDU_GPA", nullable = false, table = "T_EDUCATION")
+    private String GPA;
     
-    @Column(name = "EXP_COMPANY_C", nullable = false, length = 100, table = "T_EXPERIENCE")
-    private String companyName;
-
-    @Column(name = "EXP_ROLE_C", nullable = false, length = 100, table = "T_EXPERIENCE")
-    private String titleName;
-
-
-    @Column(name = "EXP_DESCRIP_C", nullable = false, length = 100, table = "T_EXPERIENCE")
-    private String jobDescription;
-
-
-    @Column(name = "EXP_START_DATE_D", nullable = false,  table = "T_EXPERIENCE")
-    private Date startDate;
-
-
-    @Column(name = " EXP_END_DATE_D", nullable = false, precision = 3, scale = 2, table = "T_EXPERIENCE")
-    private Date endDate;
-
-
-
     
     public String getId() {
         return id;
@@ -320,14 +282,6 @@ import java.util.Date;
     }
 
 
-    public String getEduId() {
-        return eduId;
-    }
-
-    public void setEduId(String eduId) {
-        this.eduId = eduId;
-    }
-
     public String getUniversityName() {
         return universityName;
     }
@@ -353,70 +307,13 @@ import java.util.Date;
     }
 
 
-    public Double getGPA() {
+    public String getGPA() {
         return GPA;
     }
 
-    public void setGPA(Double GPA) {
+    public void setGPA(String GPA) {
         this.GPA = GPA;
     }
-    
-
-    public String getExpId() {
-        return expId;
-    }
-
-    public void setExpId(String expId) {
-        this.expId = expId;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-
-    public String getTitleName() {
-        return titleName;
-    }
-
-    public void setTitleName(String titleName) {
-        this.titleName = titleName;
-    }
-
-    public String getJobDescription() {
-        return jobDescription;
-    }
-
-    public void setJobDescription(String jobDescription)
-     {
-        this.jobDescription = jobDescription;
-    }
-
-
-
-  public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-    
-
-  public Date getEndDate() {
-    return endDate;
-}
-
-public void setEndDate(Date endDate) {
-    this.endDate = endDate;
-}
-
-
-
 
 
     @Override

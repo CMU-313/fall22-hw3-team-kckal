@@ -119,7 +119,7 @@ public class DocumentDto {
 
     private Date graduationDate;
 
-    private double GPA;
+    private String GPA;
 
 
 
@@ -319,7 +319,7 @@ public class DocumentDto {
         this.graduationDate = graduationDate;
     }
 
-    public Double getGPA() {
+    public String getGPA() {
         return GPA;
     }
 
