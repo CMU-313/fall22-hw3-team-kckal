@@ -1,5 +1,7 @@
 package com.sismics.docs.core.dao.dto;
 
+import java.util.Date;
+
 /**
  * Document DTO.
  *
@@ -110,6 +112,17 @@ public class DocumentDto {
      * Search highlight.
      */
     private String highlight;
+
+    private String universityName;
+
+    private String majorName;
+
+    private Long graduationDate;
+
+    private String GPA;
+
+
+
 
     public String getId() {
         return id;
@@ -281,4 +294,37 @@ public class DocumentDto {
         this.highlight = highlight;
         return this;
     }
+
+    public String getUniversityName() {
+        return universityName;
+    }
+
+    public void setUniversityName(String universityName) {
+        this.universityName = universityName;
+    }
+
+    public String getMajorName() {
+        return majorName;
+    }
+
+    public void setMajorName(String majorName) {
+        this.majorName = majorName;
+    }
+
+    public Long getGraduationDate() {
+        return graduationDate;
+    }
+
+    public void setGraduationDate(Long graduationDate) {
+        this.graduationDate = graduationDate;
+    }
+
+    public String getGPA() {
+        return GPA;
+    }
+
+    public void setGPA(String GPA) {
+        this.GPA = GPA;
+    }
+ 
 }
