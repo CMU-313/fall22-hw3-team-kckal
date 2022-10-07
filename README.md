@@ -14,6 +14,7 @@ Teedy is an open source, lightweight document management system for individuals 
 - New feature: From the applicant side, being able to submit education when adding a document.
 -Includes major, university name, graduation date, gpa
 -More details: check kanban board
+
 # Features
 
 - Responsive user interface
