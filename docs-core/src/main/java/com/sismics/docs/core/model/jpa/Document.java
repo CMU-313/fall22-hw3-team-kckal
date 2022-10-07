@@ -118,6 +118,23 @@ public class Document implements Loggable {
      */
     @Column(name = "DOC_DELETEDATE_D")
     private Date deleteDate;
+
+
+    @Column(name = "EDU_NAME_C", nullable = false, length = 100)
+    private String universityName;
+
+
+    @Column(name = "EDU_MAJOR_C", nullable = false, length = 100)
+    private String majorName;
+
+
+    @Column(name = "EDU_GRAD_DATE_D", nullable = false)
+    private Date graduationDate;
+
+
+    @Column(name = "EDU_GPA", nullable = false)
+    private String GPA;
+    
     
     public String getId() {
         return id;
@@ -256,6 +273,41 @@ public class Document implements Loggable {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+
+
+    public String getUniversityName() {
+        return universityName;
+    }
+
+    public void setUniversityName(String universityName) {
+        this.universityName = universityName;
+    }
+
+    public String getMajorName() {
+        return majorName;
+    }
+
+    public void setMajorName(String majorName) {
+        this.majorName = majorName;
+    }
+
+    public Date getGraduationDate() {
+        return graduationDate;
+    }
+
+    public void setGraduationDate(Date graduationDate) {
+        this.graduationDate = graduationDate;
+    }
+
+
+    public String getGPA() {
+        return GPA;
+    }
+
+    public void setGPA(String GPA) {
+        this.GPA = GPA;
+    }
+
 
     @Override
     public String toString() {

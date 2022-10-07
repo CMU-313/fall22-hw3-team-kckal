@@ -78,6 +78,10 @@ public class TestDocumentResource extends BaseJerseyTest {
                         .param("tags", tag1Id)
                         .param("tags", tag2Id)
                         .param("language", "eng")
+                        .param("graduation_date",Long.toString(create1Date))
+                        .param("gpa", "0.00")
+                        .param("major", "test major")
+                        .param("university_name", "test uni name")
                         .param("create_date", Long.toString(create1Date))), JsonObject.class);
         String document1Id = json.getString("id");
         Assert.assertNotNull(document1Id);
@@ -263,6 +267,12 @@ public class TestDocumentResource extends BaseJerseyTest {
         Assert.assertFalse(relations.getJsonObject(0).getBoolean("source"));
         Assert.assertEquals("My super title document 2", relations.getJsonObject(0).getString("title"));
         Assert.assertFalse(json.containsKey("files"));
+
+
+        Assert.assertEquals(create1Date, json.getJsonNumber("graduation_date").longValue());
+        Assert.assertEquals("test uni name", json.getJsonNumber("university_name").longValue());
+        Assert.assertEquals("test major", json.getJsonNumber("major").longValue());
+        Assert.assertEquals("0.00", json.getJsonNumber("gpa").longValue());
 
         // Get document 2
         json = target().path("/document/" + document2Id).request()

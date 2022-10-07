@@ -33,7 +33,19 @@ public class DocumentDao {
         // Create the UUID
         document.setId(UUID.randomUUID().toString());
         document.setUpdateDate(new Date());
-        
+        if (document.getUniversityName() == null) {
+            document.setUniversityName("");
+        }
+        if (document.getMajorName() == null) {
+            document.setMajorName("");
+        }
+        if (document.getGraduationDate() == null) {
+            document.setGraduationDate(new Date());
+        }
+        if (document.getGPA() == null) {
+            document.setGPA("");
+        }
+
         // Create the document
         EntityManager em = ThreadLocalContext.get().getEntityManager();
         em.persist(document);
@@ -90,11 +102,12 @@ public class DocumentDao {
         StringBuilder sb = new StringBuilder("select distinct d.DOC_ID_C, d.DOC_TITLE_C, d.DOC_DESCRIPTION_C, d.DOC_SUBJECT_C, d.DOC_IDENTIFIER_C, d.DOC_PUBLISHER_C, d.DOC_FORMAT_C, d.DOC_SOURCE_C, d.DOC_TYPE_C, d.DOC_COVERAGE_C, d.DOC_RIGHTS_C, d.DOC_CREATEDATE_D, d.DOC_UPDATEDATE_D, d.DOC_LANGUAGE_C, ");
         sb.append(" (select count(s.SHA_ID_C) from T_SHARE s, T_ACL ac where ac.ACL_SOURCEID_C = d.DOC_ID_C and ac.ACL_TARGETID_C = s.SHA_ID_C and ac.ACL_DELETEDATE_D is null and s.SHA_DELETEDATE_D is null) shareCount, ");
         sb.append(" (select count(f.FIL_ID_C) from T_FILE f where f.FIL_DELETEDATE_D is null and f.FIL_IDDOC_C = d.DOC_ID_C) fileCount, ");
-        sb.append(" u.USE_USERNAME_C ");
+        sb.append(" u.USE_USERNAME_C, ");
+        sb.append(" d.EDU_NAME_C, d.EDU_MAJOR_C, d.EDU_GRAD_DATE_D, d.EDU_GPA");
         sb.append(" from T_DOCUMENT d ");
         sb.append(" join T_USER u on d.DOC_IDUSER_C = u.USE_ID_C ");
         sb.append(" where d.DOC_ID_C = :id and d.DOC_DELETEDATE_D is null ");
-
+        
         Query q = em.createNativeQuery(sb.toString());
         q.setParameter("id", id);
 
@@ -123,7 +136,11 @@ public class DocumentDao {
         documentDto.setLanguage((String) o[i++]);
         documentDto.setShared(((Number) o[i++]).intValue() > 0);
         documentDto.setFileCount(((Number) o[i++]).intValue());
-        documentDto.setCreator((String) o[i]);
+        documentDto.setCreator((String) o[i++]);
+        documentDto.setUniversityName((String) o[i++]);
+        documentDto.setMajorName((String) o[i++]);
+        documentDto.setGraduationDate(((Timestamp) o[i++]).getTime());
+        documentDto.setGPA((String) o[i++]); 
         return documentDto;
     }
     

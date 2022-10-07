@@ -1,5 +1,50 @@
 package com.sismics.docs.rest.resource;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Properties;
+import java.util.Set;
+import java.util.UUID;
+
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
+import org.joda.time.format.DateTimeParser;
+
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -7,10 +52,22 @@ import com.sismics.docs.core.constant.AclType;
 import com.sismics.docs.core.constant.ConfigType;
 import com.sismics.docs.core.constant.Constants;
 import com.sismics.docs.core.constant.PermType;
-import com.sismics.docs.core.dao.*;
+import com.sismics.docs.core.dao.AclDao;
+import com.sismics.docs.core.dao.ContributorDao;
+import com.sismics.docs.core.dao.DocumentDao;
+import com.sismics.docs.core.dao.FileDao;
+import com.sismics.docs.core.dao.RelationDao;
+import com.sismics.docs.core.dao.RouteStepDao;
+import com.sismics.docs.core.dao.TagDao;
+import com.sismics.docs.core.dao.UserDao;
 import com.sismics.docs.core.dao.criteria.DocumentCriteria;
 import com.sismics.docs.core.dao.criteria.TagCriteria;
-import com.sismics.docs.core.dao.dto.*;
+import com.sismics.docs.core.dao.dto.AclDto;
+import com.sismics.docs.core.dao.dto.ContributorDto;
+import com.sismics.docs.core.dao.dto.DocumentDto;
+import com.sismics.docs.core.dao.dto.RelationDto;
+import com.sismics.docs.core.dao.dto.RouteStepDto;
+import com.sismics.docs.core.dao.dto.TagDto;
 import com.sismics.docs.core.event.DocumentCreatedAsyncEvent;
 import com.sismics.docs.core.event.DocumentDeletedAsyncEvent;
 import com.sismics.docs.core.event.DocumentUpdatedAsyncEvent;
@@ -19,7 +76,13 @@ import com.sismics.docs.core.model.context.AppContext;
 import com.sismics.docs.core.model.jpa.Document;
 import com.sismics.docs.core.model.jpa.File;
 import com.sismics.docs.core.model.jpa.User;
-import com.sismics.docs.core.util.*;
+import com.sismics.docs.core.util.ConfigUtil;
+import com.sismics.docs.core.util.DirectoryUtil;
+import com.sismics.docs.core.util.DocumentUtil;
+import com.sismics.docs.core.util.FileUtil;
+import com.sismics.docs.core.util.MetadataUtil;
+import com.sismics.docs.core.util.PdfUtil;
+import com.sismics.docs.core.util.TagUtil;
 import com.sismics.docs.core.util.jpa.PaginatedList;
 import com.sismics.docs.core.util.jpa.PaginatedLists;
 import com.sismics.docs.core.util.jpa.SortCriteria;
@@ -33,32 +96,7 @@ import com.sismics.util.EmailUtil;
 import com.sismics.util.JsonUtil;
 import com.sismics.util.context.ThreadLocalContext;
 import com.sismics.util.mime.MimeType;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
-import org.glassfish.jersey.media.multipart.FormDataBodyPart;
-import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.DateTimeFormatterBuilder;
-import org.joda.time.format.DateTimeParser;
-
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.text.MessageFormat;
-import java.util.*;
+import java.time.Instant;
 
 /**
  * Document REST resources.
@@ -81,7 +119,7 @@ public class DocumentResource extends BaseResource {
             MONTH_PARSER,
             DAY_PARSER};
     private static final DateTimeFormatter DATE_FORMATTER = new DateTimeFormatterBuilder().append( null, DATE_PARSERS).toFormatter();
-
+    private String graduationDateValue = "";
     /**
      * Returns a document.
      *
@@ -103,6 +141,12 @@ public class DocumentResource extends BaseResource {
      * @apiSuccess {String} tags.id ID
      * @apiSuccess {String} tags.name Name
      * @apiSuccess {String} tags.color Color
+     * 
+     * @apiSuccess {String} university_name Applicant university name
+     * @apiSuccess {String} major Applicant major
+     * @apiSuccess {String} graduation_date Applicant graduation date (timestamp)
+     * @apiSuccess {Number} gpa Applicant Grade point average
+     * 
      * @apiSuccess {String} subject Subject
      * @apiSuccess {String} identifier Identifier
      * @apiSuccess {String} publisher Publisher
@@ -171,6 +215,10 @@ public class DocumentResource extends BaseResource {
                 .add("description", JsonUtil.nullable(documentDto.getDescription()))
                 .add("create_date", documentDto.getCreateTimestamp())
                 .add("update_date", documentDto.getUpdateTimestamp())
+                .add("university_name", documentDto.getUniversityName())
+                .add("major", documentDto.getMajorName())
+                .add("graduation_date", documentDto.getGraduationDate())
+                .add("gpa", documentDto.getGPA())
                 .add("language", documentDto.getLanguage())
                 .add("shared", documentDto.getShared())
                 .add("file_count", documentDto.getFileCount());
@@ -376,6 +424,12 @@ public class DocumentResource extends BaseResource {
      * @apiSuccess {Number} documents.create_date Create date (timestamp)
      * @apiSuccess {Number} documents.update_date Update date (timestamp)
      * @apiSuccess {String} documents.language Language
+     * 
+     * @apiSuccess {String} documents.university_name Applicant university name
+     * @apiSuccess {String} documents.major Applicant major
+     * @apiSuccess {String} documents.graduation_date Applicant graduation date (timestamp)
+     * @apiSuccess {Number} documents.gpa Applicant Grade point average
+     * 
      * @apiSuccess {Boolean} documents.shared True if the document is shared
      * @apiSuccess {Boolean} documents.active_route True if a route is active on this document
      * @apiSuccess {Boolean} documents.current_step_name Name of the current route step
@@ -461,6 +515,12 @@ public class DocumentResource extends BaseResource {
                     .add("description", JsonUtil.nullable(documentDto.getDescription()))
                     .add("create_date", documentDto.getCreateTimestamp())
                     .add("update_date", documentDto.getUpdateTimestamp())
+
+                    .add("university_name", documentDto.getUniversityName())
+                    .add("major", documentDto.getMajorName())
+                    .add("graduation_date", documentDto.getGraduationDate())
+                    .add("gpa", documentDto.getGPA())
+
                     .add("language", documentDto.getLanguage())
                     .add("shared", documentDto.getShared())
                     .add("active_route", documentDto.isActiveRoute())
@@ -679,6 +739,12 @@ public class DocumentResource extends BaseResource {
      * @apiGroup Document
      * @apiParam {String} title Title
      * @apiParam {String} [description] Description
+     * 
+     * @apiParam {String} [university_name] Applicant University Name
+     * @apiParam {String} [major] Applicant major
+     * @apiParam {String} [graduation_date] Applicant graduation date (timestamp)
+     * @apiParam {Number} [gpa] Applicant Grade point average
+     * 
      * @apiParam {String} [subject] Subject
      * @apiParam {String} [identifier] Identifier
      * @apiParam {String} [publisher] Publisher
@@ -701,6 +767,12 @@ public class DocumentResource extends BaseResource {
      *
      * @param title Title
      * @param description Description
+     * 
+     * @param universityName Applicant university name
+     * @param major Applicant major
+     * @param graduationDateStr Applicant graduation date (timestamp)
+     * @param gpa Applicant Grade point average
+     * 
      * @param subject Subject
      * @param identifier Identifier
      * @param publisher Publisher
@@ -721,6 +793,12 @@ public class DocumentResource extends BaseResource {
     public Response add(
             @FormParam("title") String title,
             @FormParam("description") String description,
+
+            @FormParam("university_name") String universityName,
+            @FormParam("major") String major,
+            @FormParam("graduation_date") String graduationDateStr,
+            @FormParam("gpa") String gpa,
+
             @FormParam("subject") String subject,
             @FormParam("identifier") String identifier,
             @FormParam("publisher") String publisher,
@@ -743,6 +821,14 @@ public class DocumentResource extends BaseResource {
         title = ValidationUtil.validateLength(title, "title", 1, 100, false);
         language = ValidationUtil.validateLength(language, "language", 3, 7, false);
         description = ValidationUtil.validateLength(description, "description", 0, 4000, true);
+
+        universityName = ValidationUtil.validateLength(universityName, "university_name", 1, 100, false);
+        major = ValidationUtil.validateLength(major, "major", 1, 100, false);
+        gpa = ValidationUtil.validateLength(gpa, "gpa", 1, 4, false);
+        
+        graduationDateValue =  Long.toString(Instant.parse( graduationDateStr ).getEpochSecond())+"000";
+        Date graduationDate = ValidationUtil.validateDate(graduationDateValue, "graduation_date", true);
+
         subject = ValidationUtil.validateLength(subject, "subject", 0, 500, true);
         identifier = ValidationUtil.validateLength(identifier, "identifier", 0, 500, true);
         publisher = ValidationUtil.validateLength(publisher, "publisher", 0, 500, true);
@@ -775,6 +861,11 @@ public class DocumentResource extends BaseResource {
         } else {
             document.setCreateDate(createDate);
         }
+
+        document.setUniversityName(universityName);
+        document.setMajorName(major);
+        document.setGraduationDate(graduationDate);
+        document.setGPA(gpa);
 
         // Save the document, create the base ACLs
         document = DocumentUtil.createDocument(document, principal.getId());
