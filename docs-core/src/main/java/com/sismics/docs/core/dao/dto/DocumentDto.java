@@ -117,7 +117,8 @@ public class DocumentDto {
 
     private String majorName;
 
-    private Date graduationDate;
+
+    private Long graduationDate;
 
     private String GPA;
 
@@ -311,11 +312,11 @@ public class DocumentDto {
         this.majorName = majorName;
     }
 
-    public Date getGraduationDate() {
+    public Long getGraduationDate() {
         return graduationDate;
     }
 
-    public void setGraduationDate(Date graduationDate) {
+    public void setGraduationDate(Long graduationDate) {
         this.graduationDate = graduationDate;
     }
 

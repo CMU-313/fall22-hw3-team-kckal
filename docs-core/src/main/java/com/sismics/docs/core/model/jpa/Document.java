@@ -16,7 +16,7 @@ import java.util.Date;
 @Entity
 @Table(name = "T_DOCUMENT")
 
- public class Document implements Loggable {
+public class Document implements Loggable {
     /**
      * Document ID.
      */
